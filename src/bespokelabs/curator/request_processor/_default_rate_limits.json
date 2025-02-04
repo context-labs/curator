@@ -1,52 +1,83 @@
 {
   "external": {
-    "cost": {
-      "klusterai/Meta-Llama-3.1-8B-Instruct-Turbo": {
-        "max_tokens": 8192,
-        "input_cost_per_million": {
-          "*": 0.18,
-          "1h": 0.09,
-          "3h": 0.08,
-          "6h": 0.07,
-          "12h": 0.06,
-          "24h": 0.05
-        }
+    "providers": {
+      "klusterai": {
+        "cost": {
+          "Meta-Llama-3.1-8B-Instruct-Turbo": {
+            "max_tokens": 8192,
+            "input_cost_per_million": {
+              "*": 0.18,
+              "1h": 0.09,
+              "3h": 0.08,
+              "6h": 0.07,
+              "12h": 0.06,
+              "24h": 0.05
+            }
+          },
+          "Meta-Llama-3.3-70B-Instruct-Turbo": {
+            "max_tokens": 8192,
+            "input_cost_per_million": {
+              "*": 0.7,
+              "1h": 0.35,
+              "3h": 0.33,
+              "6h": 0.3,
+              "12h": 0.25,
+              "24h": 0.2
+            }
+          },
+          "Meta-Llama-3.1-405B-Instruct-Turbo": {
+            "max_tokens": 8192,
+            "input_cost_per_million": {
+              "*": 3.5,
+              "1h": 1.75,
+              "3h": 1.6,
+              "6h": 1.45,
+              "12h": 1.2,
+              "24h": 0.99
+            }
+          },
+          "DeepSeek-R1": {
+            "max_tokens": 8192,
+            "input_cost_per_million": {
+              "*": 7,
+              "1h": 5.5,
+              "3h": 5,
+              "6h": 4.5,
+              "12h": 4,
+              "24h": 3.5
+            }
+          }
+        },
+        "strategy": "combined"
       },
-      "klusterai/Meta-Llama-3.3-70B-Instruct-Turbo": {
-        "max_tokens": 8192,
-        "input_cost_per_million": {
-          "*": 0.7,
-          "1h": 0.35,
-          "3h": 0.33,
-          "6h": 0.3,
-          "12h": 0.25,
-          "24h": 0.2
-        }
-      },
-      "klusterai/Meta-Llama-3.1-405B-Instruct-Turbo": {
-        "max_tokens": 8192,
-        "input_cost_per_million": {
-          "*": 3.5,
-          "1h": 1.75,
-          "3h": 1.6,
-          "6h": 1.45,
-          "12h": 1.2,
-          "24h": 0.99
-        }
-      },
-      "deepseek-ai/DeepSeek-R1": {
-        "max_tokens": 8192,
-        "input_cost_per_million": {
-          "*": 7,
-          "1h": 5.5,
-          "3h": 5,
-          "6h": 4.5,
-          "12h": 4,
-          "24h": 3.5
-        }
+      "inference.net": {
+        "cost": {
+          "Meta-Llama-3.1-8B-Instruct-Turbo": {
+            "max_tokens": 8192,
+            "input_cost_per_million": {
+              "*": 0.15,
+              "1h": 0.08,
+              "3h": 0.07,
+              "6h": 0.06,
+              "12h": 0.05,
+              "24h": 0.04
+            }
+          },
+          "Meta-Llama-3.3-70B-Instruct-Turbo": {
+            "max_tokens": 8192,
+            "input_cost_per_million": {
+              "*": 0.65,
+              "1h": 0.32,
+              "3h": 0.30,
+              "6h": 0.28,
+              "12h": 0.23,
+              "24h": 0.18
+            }
+          }
+        },
+        "strategy": "combined"
       }
-    },
-    "strategy": "combined"
+    }
   },
   "online": {
     "default": {
