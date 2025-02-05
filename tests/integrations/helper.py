@@ -188,15 +188,15 @@ def create_llm(batch=False, batch_check_interval=1):
     return prompter
 
 
-def create_multimodal_llm(batch=False, batch_check_interval=1):
+def create_multimodal_llm(batch=False, batch_check_interval=1, model="gpt-4o-mini", backend="openai"):
     if batch:
         backend_params = {"batch_check_interval": batch_check_interval}
     else:
         backend_params = {}
 
     prompter = MultiModalLLM(
-        model_name="gpt-4o-mini",
-        backend="openai",
+        model_name=model,
+        backend=backend,
         backend_params=backend_params,
         batch=batch,
     )
