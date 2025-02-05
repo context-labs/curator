@@ -58,10 +58,10 @@ def test_basic_multimodal_image_url(temp_working_dir):
 def test_basic_multimodal_file_url(temp_working_dir):
     temp_working_dir, backend, vcr_config = temp_working_dir
     hash_book = {
-        "litellm": "2820c895e54da18d09ad33a53989e85ec22c92b80d4d8c8f54301e662da45dc2",
+        "litellm": "e31aa6465350a8385d7432d95b7107b7c191eb7e26af016c08b03e4ad9d45149",
     }
 
-    url = "https://storage.googleapis.com/cloud-samples-data/generative-ai/pdf/2403.05530.pdf"
+    url = "https://pdfobject.com/pdf/sample.pdf"
     dataset = Dataset.from_dict({"pdf": [url], "text": ["Describe the pdf"]})
 
     with vcr_config.use_cassette("basic_multimodal_file_url_completion.yaml"):
