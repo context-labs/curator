@@ -23,7 +23,7 @@ litellm.suppress_debug_info = True
 _OTPM_LIMIT = defaultdict(lambda: "output_tokens")
 _OTPM_LIMIT["anthropic"] = "max_tokens"
 _CONCURRENT_ONLY_RATELIMIT_PROVIDERS = {"deepinfra"}
-_FILE_UPLOAD_LIMIT_PROVIDERS = {"openai": 20}
+_FILE_UPLOAD_LIMIT_PROVIDERS = {"openai": 20}  # MB
 
 
 class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
@@ -127,13 +127,11 @@ class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
             mb = get_base64_size(base64_image)
             limit = _FILE_UPLOAD_LIMIT_PROVIDERS[provider]
             if mb > limit:
-                raise ValueError(f"Uploaded object size is {mb} MB, which is greater than the " f"allowed size of {limit} MB.")
+                raise ValueError(f"Uploaded object size is {mb} MB,", f"which is greater than the allowed size of {limit} MB.")
 
     @property
     def _multimodal_prompt_supported(self) -> bool:
-        if litellm.supports_vision(self.config.model):
-            return True
-        return False
+        return litellm.supports_vision(self.config.model)
 
     def check_structured_output_support(self):
         """Verify if the model supports structured output via instructor.

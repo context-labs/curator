@@ -181,13 +181,11 @@ class OpenAIOnlineRequestProcessor(BaseOnlineRequestProcessor, OpenAIRequestMixi
         """Check if the image size is within the allowed limit."""
         mb = get_base64_size(base64_image)
         if mb > _OPENAI_ALLOWED_IMAGE_SIZE_MB:
-            raise ValueError(f"Image size is {mb} MB, which is greater than the " f"allowed size of {_OPENAI_ALLOWED_IMAGE_SIZE_MB} MB.")
+            raise ValueError(f"Image size is {mb} MB, which is greater than the allowed size of {_OPENAI_ALLOWED_IMAGE_SIZE_MB} MB.")
 
     @property
     def _multimodal_prompt_supported(self) -> bool:
-        if any(self.config.model.startswith(k) for k in _OPENAI_MULTIMODAL_SUPPORTED_MODELS):
-            return True
-        return False
+        return any(self.config.model.startswith(k) for k in _OPENAI_MULTIMODAL_SUPPORTED_MODELS)
 
     def create_api_specific_request_online(self, generic_request: GenericRequest) -> dict:
         """Create an OpenAI-specific request from a generic request.

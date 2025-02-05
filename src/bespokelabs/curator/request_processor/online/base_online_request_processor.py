@@ -16,7 +16,6 @@ from dataclasses import dataclass, field
 
 import aiofiles
 import aiohttp
-import pydantic
 
 from bespokelabs.curator.llm.prompt_formatter import PromptFormatter
 from bespokelabs.curator.request_processor import _DEFAULT_COST_MAP
@@ -113,22 +112,20 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
 
     def _unpack_multimodal(self, request: GenericRequest) -> GenericRequest:
         messages = request.messages
-        if request.multimodal_prompt is True and self._multimodal_prompt_supported is False:
+        if request.is_multimodal_prompt is True and self._multimodal_prompt_supported is False:
             raise TypeError(f"Multimodal prompts are not supported by this model {self.config.model}.")
 
-        if request.multimodal_prompt is False:
+        if request.is_multimodal_prompt is False:
             return request
 
         unpacked_messages = []
         for message in messages:
-            try:
-                content = _MultiModalPrompt.model_validate(message["content"])
-                content = self._handle_multi_modal_prompt(content)
-                message["content"] = content
-                unpacked_messages.append(message)
+            # Load message content as multimodal prompt
+            content = _MultiModalPrompt.model_validate(message["content"])
+            content = self._handle_multi_modal_prompt(content)
+            message["content"] = content
+            unpacked_messages.append(message)
 
-            except pydantic.ValidationError:
-                unpacked_messages.append(message)
         request.messages = unpacked_messages
         return request
 
