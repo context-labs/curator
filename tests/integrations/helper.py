@@ -31,10 +31,17 @@ class BasicLLM(curator.LLM):
 
 
 class MultiModalLLM(curator.LLM):
+    def __init__(self, *args, **kwargs):
+        self.input_type = kwargs.pop("input_type", "image")
+        super().__init__(*args, **kwargs)
+
     def prompt(self, input: dict):
-        if isinstance(input["image"], str):
-            return input["text"], curator.types.Image(url=input["image"])
-        return input["text"], curator.types.Image(content=input["image"])
+        if self.input_type == "image":
+            if isinstance(input["image"], str):
+                return input["text"], curator.types.Image(url=input["image"])
+            return input["text"], curator.types.Image(content=input["image"])
+        else:
+            return input["text"], curator.types.File(url=input["pdf"])
 
     def parse(self, input: dict, response) -> dict:
         return {"description": response}
@@ -188,16 +195,16 @@ def create_llm(batch=False, batch_check_interval=1):
     return prompter
 
 
-def create_multimodal_llm(batch=False, batch_check_interval=1, model="gpt-4o-mini", backend="openai"):
+def create_multimodal_llm(batch=False, batch_check_interval=1, model="gpt-4o-mini", backend="openai", input_type="image"):
     if batch:
         backend_params = {"batch_check_interval": batch_check_interval}
     else:
         backend_params = {}
-
     prompter = MultiModalLLM(
         model_name=model,
         backend=backend,
         backend_params=backend_params,
         batch=batch,
+        input_type=input_type,
     )
     return prompter
