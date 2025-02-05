@@ -104,7 +104,7 @@ class PromptFormatter:
             original_row_idx=idx,
             response_format=(self.response_format.model_json_schema() if self.response_format else None),
             generation_params=self.generation_params,
-            multimodal_prompt=multimodal_prompt,
+            is_multimodal_prompt=multimodal_prompt,
         )
 
     def response_to_response_format(self, response_message: str | dict) -> Optional[dict | str]:
