@@ -33,6 +33,7 @@ class _LitellmCostProcessor:
 
 def _get_litellm_cost_map(model, completion_window="*", provider="default"):
     cost = external_model_cost(model, completion_window=completion_window, provider=provider)
+    print("cost", cost)
     litellm_cost_map = {
         model: {
             "max_tokens": 8192,
@@ -47,13 +48,15 @@ def _get_litellm_cost_map(model, completion_window="*", provider="default"):
 
 def external_model_cost(model, completion_window="*", provider="default"):
     """Get the cost of the model from the external providers registered."""
+    print("provider", provider)
     if provider not in _DEFAULT_COST_MAP["external"]["providers"]:
+        print("provider not in _DEFAULT_COST_MAP", provider)
         return {"input_cost_per_token": 0.0, "output_cost_per_token": 0.0}
     cost = _DEFAULT_COST_MAP["external"]["providers"][provider]["cost"][model]["input_cost_per_million"][completion_window]
     return {"input_cost_per_token": cost / 1e6, "output_cost_per_token": cost / 1e6}
 
 
-#source: https://www.kluster.ai/#pricing
+# source: https://www.kluster.ai/#pricing
 class _KlusterAICostProcessor(_LitellmCostProcessor):
     _registered_models = set()
 
@@ -66,6 +69,7 @@ class _KlusterAICostProcessor(_LitellmCostProcessor):
         return model + "." + completion_window
 
     def cost(self, *, completion_window="*", **kwargs):
+        print("HIT_HERE_2")
         if "completion_response" in kwargs:
             model = kwargs["completion_response"]["model"]
         else:
@@ -79,6 +83,7 @@ class _KlusterAICostProcessor(_LitellmCostProcessor):
         litellm.register_model(_get_litellm_cost_map(model, provider="klusterai", completion_window=completion_window))
         _KlusterAICostProcessor._registered_models.add(_KlusterAICostProcessor._wrap(model, completion_window))
         return super().cost(**kwargs) * times
+
 
 # source: https://docs.inference.net/resources/pricing
 class _InferenceNetCostProcessor(_LitellmCostProcessor):
