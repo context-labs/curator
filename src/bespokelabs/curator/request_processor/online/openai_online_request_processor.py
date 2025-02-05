@@ -11,6 +11,7 @@ import tiktoken
 
 from bespokelabs.curator.cost import cost_processor_factory
 from bespokelabs.curator.file_utilities import get_base64_size
+from bespokelabs.curator.request_processor import openai_request_mixin
 from bespokelabs.curator.request_processor.config import OnlineRequestProcessorConfig
 from bespokelabs.curator.request_processor.online.base_online_request_processor import APIRequest, BaseOnlineRequestProcessor
 from bespokelabs.curator.request_processor.openai_request_mixin import OpenAIRequestMixin
@@ -130,7 +131,7 @@ class OpenAIOnlineRequestProcessor(BaseOnlineRequestProcessor, OpenAIRequestMixi
             num_tokens += 4  # every message follows <im_start>{role/name}\n{content}<im_end>\n
             for key, value in message.items():
                 try:
-                    num_tokens += len(self.token_encoding.encode(str(value), disallowed_special=()))
+                    num_tokens += openai_request_mixin.calculate_input_tokens(value, self.token_encoding)
                 except TypeError:
                     logger.warning(f"Failed to encode value {value} with tiktoken. Assuming 1 token per 4 chars.")
                     num_tokens += len(str(value)) // 4

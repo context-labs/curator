@@ -45,7 +45,7 @@ def main():
     #############################################
 
     recipe_generator = RecipeGenerator(
-        model_name="gpt-4o",
+        model_name="gpt-4o-mini",
         backend="openai",
     )
 
