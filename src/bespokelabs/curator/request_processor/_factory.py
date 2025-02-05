@@ -113,7 +113,7 @@ class _RequestProcessorFactory:
 
             _request_processor = OpenAIBatchRequestProcessor(config, compatible_provider="klusterai")
         elif backend == "inference.net" and not batch:
-            config.base_url = "https://batch.inference.net/v1"
+            config.base_url = "https://api.inference.net/v1"
             config.api_key = config.api_key or os.getenv("INFERENCE_API_KEY")
             if not config.api_key:
                 raise ValueError("INFERENCE_API_KEY is not set")
