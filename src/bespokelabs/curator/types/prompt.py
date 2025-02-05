@@ -1,5 +1,6 @@
 # Description: Pydantic models for multimodal prompts.
 import base64
+import mimetypes
 import typing as t
 from io import BytesIO
 
@@ -63,7 +64,14 @@ class File(BaseType):
     """A class to represent a file for multimodal prompts."""
 
     url: str = Field(..., description="The URL of the file.")
+    mime_type: str | None = Field(None, description="The MIME type of the file.")
     type: t.ClassVar[str] = "file"
+
+    def __post_init__(self):
+        """Post init."""
+        if not self.mime_type:
+            mime_type, _ = mimetypes.guess_type(self.url)
+            self.mime_type = mime_type.lower()
 
 
 class _MultiModalPrompt(BaseType):

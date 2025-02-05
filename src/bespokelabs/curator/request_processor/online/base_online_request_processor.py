@@ -113,7 +113,10 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
 
     def _unpack_multimodal(self, request: GenericRequest) -> GenericRequest:
         messages = request.messages
-        if not self._multimodal_prompt_supported or request.multimodal_prompt is False:
+        if request.multimodal_prompt is True and self._multimodal_prompt_supported is False:
+            raise TypeError(f"Multimodal prompts are not supported by this model {self.config.model}.")
+
+        if request.multimodal_prompt is False:
             return request
 
         unpacked_messages = []
@@ -135,25 +138,33 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
         pass
 
     def _handle_multi_modal_prompt(self, message):
+        def _openai_mutlimodal_format(data, mime_type="image/png"):
+            if data.url:
+                return {"type": "image_url", "image_url": {"url": data.url}}
+            elif data.content:
+                base64_content = data.serialize()
+                self.file_upload_limit_check(base64_content)
+
+                content = {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:{mime_type};base64,{base64_content}",
+                    },
+                }
+                if mime_type == "image/png":
+                    content["image_url"].update({"detail": "low"})
+                return content
+
         content = []
         texts = message.texts
+
         for text in texts:
             content.append({"type": "text", "text": text})
         for image in message.images:
-            if image.url:
-                content.append({"type": "image_url", "image_url": {"url": image.url}})
-            elif image.content:
-                base64_image = image.serialize()
-                self.file_upload_limit_check(base64_image)
-                content.append(
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/png;base64,{base64_image}",
-                            "detail": "low",
-                        },
-                    }
-                )
+            content.append(_openai_mutlimodal_format(image))
+        for file in message.files:
+            content.append(_openai_mutlimodal_format(file, mime_type=file.mime_type))
+
         return content
 
     @property
