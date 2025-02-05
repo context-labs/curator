@@ -59,6 +59,11 @@ class BaseBatchRequestProcessor(BaseRequestProcessor):
         """Backend property."""
         return "base"
 
+    @property
+    def compatible_provider(self) -> str:
+        """Compatible provider property."""
+        return self.backend
+
     def requests_to_responses(self, generic_request_files: list[str]) -> None:
         """Process multiple request files using batch API operations.
 
@@ -306,10 +311,16 @@ class BaseBatchRequestProcessor(BaseRequestProcessor):
             from bespokelabs.curator.cost import external_model_cost
 
             self.tracker.input_cost_per_million = (
-                external_model_cost(self.prompt_formatter.model_name, completion_window=self.config.completion_window)["input_cost_per_token"] * 1_000_000
+                external_model_cost(self.prompt_formatter.model_name, provider=self.compatible_provider, completion_window=self.config.completion_window)[
+                    "input_cost_per_token"
+                ]
+                * 1_000_000
             )
             self.tracker.output_cost_per_million = (
-                external_model_cost(self.prompt_formatter.model_name, completion_window=self.config.completion_window)["output_cost_per_token"] * 1_000_000
+                external_model_cost(self.prompt_formatter.model_name, provider=self.compatible_provider, completion_window=self.config.completion_window)[
+                    "output_cost_per_token"
+                ]
+                * 1_000_000
             )
 
         # Start the tracker with the console from constructor

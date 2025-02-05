@@ -36,6 +36,7 @@ class OpenAIBatchRequestProcessor(BaseBatchRequestProcessor, OpenAIRequestMixin)
         """Initialize the OpenAIBatchRequestProcessor."""
         super().__init__(config)
         self._cost_processor = cost_processor_factory(compatible_provider or self.backend)
+        self._compatible_provider = compatible_provider or self.backend
 
         self._skip_file_status_check = False
         if self.config.base_url is None:
@@ -51,6 +52,11 @@ class OpenAIBatchRequestProcessor(BaseBatchRequestProcessor, OpenAIRequestMixin)
     def backend(self):
         """Backend property."""
         return "openai"
+
+    @property
+    def compatible_provider(self) -> str:
+        """Compatible provider property."""
+        return self._compatible_provider
 
     @property
     def _multimodal_prompt_supported(self) -> bool:
@@ -331,7 +337,7 @@ class OpenAIBatchRequestProcessor(BaseBatchRequestProcessor, OpenAIRequestMixin)
             request_file = batch.request_file
             batch = await self.client.batches.retrieve(batch.id)
         except NotFoundError:
-            logger.warning(f"batch object {batch.id} not found. " f"Your API key (***{self.client.api_key[-4:]}) might not have access to this batch.")
+            logger.warning(f"batch object {batch.id} not found. Your API key (***{self.client.api_key[-4:]}) might not have access to this batch.")
             return None
         return self.parse_api_specific_batch_object(batch, request_file=request_file)
 
