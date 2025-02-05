@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 
 import aiofiles
 import aiohttp
+import pydantic
 
 from bespokelabs.curator.llm.prompt_formatter import PromptFormatter
 from bespokelabs.curator.request_processor import _DEFAULT_COST_MAP
@@ -25,6 +26,7 @@ from bespokelabs.curator.request_processor.event_loop import run_in_event_loop
 from bespokelabs.curator.status_tracker.online_status_tracker import OnlineStatusTracker, TokenLimitStrategy, _TokenCount
 from bespokelabs.curator.types.generic_request import GenericRequest
 from bespokelabs.curator.types.generic_response import GenericResponse
+from bespokelabs.curator.types.prompt import _MultiModalPrompt
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -108,6 +110,51 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
             ValueError: If configuration parameters are invalid
         """
         pass
+
+    def _unpack_multimodal(self, request: GenericRequest) -> GenericRequest:
+        messages = request.messages
+        if not self._multimodal_prompt_supported or request.multimodal_prompt is False:
+            return request
+
+        unpacked_messages = []
+        for message in messages:
+            try:
+                content = _MultiModalPrompt.model_validate(message["content"])
+                content = self._handle_multi_modal_prompt(content)
+                message["content"] = content
+                unpacked_messages.append(message)
+
+            except pydantic.ValidationError:
+                unpacked_messages.append(message)
+        request.messages = unpacked_messages
+        return request
+
+    @abstractmethod
+    def file_upload_limit_check(self, base64_image: str) -> None:
+        """Check if the image size is within the allowed limit."""
+        pass
+
+    def _handle_multi_modal_prompt(self, message):
+        content = []
+        texts = message.texts
+        for text in texts:
+            content.append({"type": "text", "text": text})
+        for image in message.images:
+            if image.url:
+                content.append({"type": "image_url", "image_url": {"url": image.url}})
+            elif image.content:
+                base64_image = image.serialize()
+                self.file_upload_limit_check(base64_image)
+                content.append(
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/png;base64,{base64_image}",
+                            "detail": "low",
+                        },
+                    }
+                )
+        return content
 
     @property
     def max_concurrent_requests(self) -> int | None:
@@ -287,6 +334,9 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
 
                     if generic_request.original_row_idx in completed_request_ids:
                         continue
+
+                    # Unpack multimodal prompts
+                    generic_request = self._unpack_multimodal(generic_request)
 
                     request = APIRequest(
                         task_id=status_tracker.num_tasks_started,

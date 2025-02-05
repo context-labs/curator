@@ -1,15 +1,9 @@
 import logging
 from typing import Any
 
-import pydantic
-
-from bespokelabs.curator.file_utilities import get_base64_size
 from bespokelabs.curator.types.generic_request import GenericRequest
-from bespokelabs.curator.types.prompt import _MultiModalPrompt
 
 logger = logger = logging.getLogger(__name__)
-
-_OPENAI_ALLOWED_IMAGE_SIZE_MB = 20  # MB
 
 
 class OpenAIRequestMixin:
@@ -33,7 +27,7 @@ class OpenAIRequestMixin:
         """
         request: dict[str, Any] = {
             "model": generic_request.model,
-            "messages": self._unpack(generic_request.messages),
+            "messages": generic_request.messages,
         }
 
         if generic_request.response_format:
@@ -48,43 +42,3 @@ class OpenAIRequestMixin:
         for key, value in generic_request.generation_params.items():
             request[key] = value
         return request
-
-    def _unpack(self, messages):
-        unpacked_messages = []
-        for message in messages:
-            try:
-                content = _MultiModalPrompt.model_validate(message["content"])
-                content = self._handle_multi_modal_prompt(content)
-                message["content"] = content
-                unpacked_messages.append(message)
-
-            except pydantic.ValidationError:
-                unpacked_messages.append(message)
-        return unpacked_messages
-
-    def _handle_multi_modal_prompt(self, message):
-        content = []
-        texts = message.texts
-        for text in texts:
-            content.append({"type": "text", "text": text})
-        for image in message.images:
-            if image.url:
-                content.append({"type": "image_url", "image_url": {"url": image.url}})
-            elif image.content:
-                base64_image = image.serialize()
-                mb = get_base64_size(base64_image)
-                if mb > _OPENAI_ALLOWED_IMAGE_SIZE_MB:
-                    raise ValueError(f"Image size is {mb} MB, which is greater than the allowed size of {_OPENAI_ALLOWED_IMAGE_SIZE_MB} MB in OpenAI.")
-
-                # TODO: add detail option in Image types.
-                content.append(
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/png;base64,{base64_image}",
-                            "detail": "low",
-                        },
-                    }
-                )
-
-        return content

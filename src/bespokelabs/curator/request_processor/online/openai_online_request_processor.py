@@ -10,6 +10,7 @@ import requests
 import tiktoken
 
 from bespokelabs.curator.cost import cost_processor_factory
+from bespokelabs.curator.file_utilities import get_base64_size
 from bespokelabs.curator.request_processor.config import OnlineRequestProcessorConfig
 from bespokelabs.curator.request_processor.online.base_online_request_processor import APIRequest, BaseOnlineRequestProcessor
 from bespokelabs.curator.request_processor.openai_request_mixin import OpenAIRequestMixin
@@ -21,6 +22,9 @@ T = TypeVar("T")
 logger = logger = logging.getLogger(__name__)
 
 _DEFAULT_OPENAI_URL: str = "https://api.openai.com/v1/chat/completions"
+
+_OPENAI_MULTIMODAL_SUPPORTED_MODELS = {"gpt-4o", "gpt-4o-mini", "gpt-4o-vision"}
+_OPENAI_ALLOWED_IMAGE_SIZE_MB = 20
 
 
 class OpenAIOnlineRequestProcessor(BaseOnlineRequestProcessor, OpenAIRequestMixin):
@@ -172,9 +176,17 @@ class OpenAIOnlineRequestProcessor(BaseOnlineRequestProcessor, OpenAIRequestMixi
 
         return False
 
+    def file_upload_limit_check(self, base64_image: str) -> None:
+        """Check if the image size is within the allowed limit."""
+        mb = get_base64_size(base64_image)
+        if mb > _OPENAI_ALLOWED_IMAGE_SIZE_MB:
+            raise ValueError(f"Image size is {mb} MB, which is greater than the " f"allowed size of {_OPENAI_ALLOWED_IMAGE_SIZE_MB} MB.")
+
     @property
     def _multimodal_prompt_supported(self) -> bool:
-        return True
+        if any(self.config.model.startswith(k) for k in _OPENAI_MULTIMODAL_SUPPORTED_MODELS):
+            return True
+        return False
 
     def create_api_specific_request_online(self, generic_request: GenericRequest) -> dict:
         """Create an OpenAI-specific request from a generic request.

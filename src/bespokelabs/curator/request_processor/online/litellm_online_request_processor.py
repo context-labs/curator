@@ -8,6 +8,7 @@ import instructor
 import litellm
 from pydantic import BaseModel
 
+from bespokelabs.curator.file_utilities import get_base64_size
 from bespokelabs.curator.request_processor.config import OnlineRequestProcessorConfig
 from bespokelabs.curator.request_processor.event_loop import run_in_event_loop
 from bespokelabs.curator.request_processor.online.base_online_request_processor import APIRequest, BaseOnlineRequestProcessor
@@ -22,6 +23,7 @@ litellm.suppress_debug_info = True
 _OTPM_LIMIT = defaultdict(lambda: "output_tokens")
 _OTPM_LIMIT["anthropic"] = "max_tokens"
 _CONCURRENT_ONLY_RATELIMIT_PROVIDERS = {"deepinfra"}
+_FILE_UPLOAD_LIMIT_PROVIDERS = {"openai": 20}
 
 
 class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
@@ -117,6 +119,21 @@ class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
     def backend(self):
         """Backend property."""
         return "litellm"
+
+    def file_upload_limit_check(self, base64_image: str) -> None:
+        """Check if the image size is within the allowed limit."""
+        provider = self.config.model.split("/")[0]
+        if provider in _FILE_UPLOAD_LIMIT_PROVIDERS:
+            mb = get_base64_size(base64_image)
+            limit = _FILE_UPLOAD_LIMIT_PROVIDERS[provider]
+            if mb > limit:
+                raise ValueError(f"Uploaded object size is {mb} MB, which is greater than the " f"allowed size of {limit} MB.")
+
+    @property
+    def _multimodal_prompt_supported(self) -> bool:
+        if litellm.supports_vision(self.config.model):
+            return True
+        return False
 
     def check_structured_output_support(self):
         """Verify if the model supports structured output via instructor.
