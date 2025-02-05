@@ -24,4 +24,4 @@ class GenericRequest(BaseModel):
     original_row: Dict[str, Any]
     original_row_idx: int
     generation_params: Dict[str, Any] = Field(default_factory=dict)
-    multimodal_prompt: bool | None = False
+    is_multimodal_prompt: bool | None = False
