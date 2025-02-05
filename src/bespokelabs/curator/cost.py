@@ -53,6 +53,7 @@ def external_model_cost(model, completion_window="*", provider="default"):
     return {"input_cost_per_token": cost / 1e6, "output_cost_per_token": cost / 1e6}
 
 
+#source: https://www.kluster.ai/#pricing
 class _KlusterAICostProcessor(_LitellmCostProcessor):
     _registered_models = set()
 
@@ -79,7 +80,7 @@ class _KlusterAICostProcessor(_LitellmCostProcessor):
         _KlusterAICostProcessor._registered_models.add(_KlusterAICostProcessor._wrap(model, completion_window))
         return super().cost(**kwargs) * times
 
-
+# source: https://docs.inference.net/resources/pricing
 class _InferenceNetCostProcessor(_LitellmCostProcessor):
     _registered_models = set()
 
