@@ -75,6 +75,7 @@ class OnlineStatusTracker:
     # Cost per million tokens
     input_cost_per_million: Optional[float] = None
     output_cost_per_million: Optional[float] = None
+    compatible_provider: Optional[str] = None
 
     start_time: float = field(default_factory=time.time, init=False)
 
@@ -132,8 +133,8 @@ class OnlineStatusTracker:
         else:
             from bespokelabs.curator.cost import external_model_cost
 
-            self.input_cost_per_million = external_model_cost(self.model)["input_cost_per_token"] * 1_000_000
-            self.output_cost_per_million = external_model_cost(self.model)["output_cost_per_token"] * 1_000_000
+            self.input_cost_per_million = external_model_cost(self.model, provider=self.compatible_provider)["input_cost_per_token"] * 1_000_000
+            self.output_cost_per_million = external_model_cost(self.model, provider=self.compatible_provider)["output_cost_per_token"] * 1_000_000
 
         self._progress.start()
 
