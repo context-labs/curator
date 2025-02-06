@@ -33,7 +33,6 @@ class _LitellmCostProcessor:
 
 def _get_litellm_cost_map(model, completion_window="*", provider="default"):
     cost = external_model_cost(model, completion_window=completion_window, provider=provider)
-    print("cost", cost)
     litellm_cost_map = {
         model: {
             "max_tokens": 8192,
@@ -48,11 +47,16 @@ def _get_litellm_cost_map(model, completion_window="*", provider="default"):
 
 def external_model_cost(model, completion_window="*", provider="default"):
     """Get the cost of the model from the external providers registered."""
-    print("provider", provider)
     if provider not in _DEFAULT_COST_MAP["external"]["providers"]:
-        print("provider not in _DEFAULT_COST_MAP", provider)
         return {"input_cost_per_token": 0.0, "output_cost_per_token": 0.0}
-    cost = _DEFAULT_COST_MAP["external"]["providers"][provider]["cost"][model]["input_cost_per_million"][completion_window]
+    provider_cost = _DEFAULT_COST_MAP["external"]["providers"][provider]["cost"]
+    if model not in provider_cost:
+        raise ValueError(f"Model {model} is not supported by {provider}.")
+
+    if completion_window not in provider_cost[model]["input_cost_per_million"]:
+        raise ValueError(f"Completion window {completion_window} is not supported for {model} by {provider}.")
+
+    cost = provider_cost[model]["input_cost_per_million"][completion_window]
     return {"input_cost_per_token": cost / 1e6, "output_cost_per_token": cost / 1e6}
 
 
@@ -69,20 +73,19 @@ class _KlusterAICostProcessor(_LitellmCostProcessor):
         return model + "." + completion_window
 
     def cost(self, *, completion_window="*", **kwargs):
-        print("HIT_HERE_2")
         if "completion_response" in kwargs:
             model = kwargs["completion_response"]["model"]
         else:
             model = kwargs.get("model", None)
         times = 2 if self.batch else 1
         if _KlusterAICostProcessor._wrap(model, completion_window) in _KlusterAICostProcessor._registered_models:
-            return super().cost(model, **kwargs) * times
+            return super().cost(completion_window=completion_window, **kwargs) * times
 
         import litellm
 
         litellm.register_model(_get_litellm_cost_map(model, provider="klusterai", completion_window=completion_window))
         _KlusterAICostProcessor._registered_models.add(_KlusterAICostProcessor._wrap(model, completion_window))
-        return super().cost(**kwargs) * times
+        return super().cost(completion_window=completion_window, **kwargs) * times
 
 
 # source: https://docs.inference.net/resources/pricing
@@ -104,13 +107,13 @@ class _InferenceNetCostProcessor(_LitellmCostProcessor):
             model = kwargs.get("model", None)
         times = 2 if self.batch else 1
         if _InferenceNetCostProcessor._wrap(model, completion_window) in _InferenceNetCostProcessor._registered_models:
-            return super().cost(model, **kwargs) * times
+            return super().cost(completion_window=completion_window, **kwargs) * times
 
         import litellm
 
         litellm.register_model(_get_litellm_cost_map(model, provider="inference.net", completion_window=completion_window))
         _InferenceNetCostProcessor._registered_models.add(_InferenceNetCostProcessor._wrap(model, completion_window))
-        return super().cost(**kwargs) * times
+        return super().cost(completion_window=completion_window, **kwargs) * times
 
 
 COST_PROCESSOR = defaultdict(lambda: _LitellmCostProcessor)

@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 _PROGRESS_STATE = {"validating", "finalizing", "cancelling", "in_progress", "pre_schedule"}
 _FINISHED_STATE = {"completed", "failed", "expired", "cancelled"}
 
-_UNSUPPORTED_FILE_STATUS_API_PROVIDERS = ("api.kluster.ai",)
+_UNSUPPORTED_FILE_STATUS_API_PROVIDERS = ("api.kluster.ai", "batch.inference.net")
 
 
 class OpenAIBatchRequestProcessor(BaseBatchRequestProcessor, OpenAIRequestMixin):
@@ -382,6 +382,7 @@ class OpenAIBatchRequestProcessor(BaseBatchRequestProcessor, OpenAIRequestMixin)
         output_file_content = None
         error_file_content = None  # noqa: F841
         openai_batch = Batch.model_validate(batch.raw_batch)
+
         async with self.semaphore:
             # Completed batches have an output file
             if openai_batch.output_file_id:
