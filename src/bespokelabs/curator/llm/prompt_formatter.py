@@ -32,13 +32,13 @@ def _validate_messages(messages: list[dict]) -> None:
 
     for msg in messages:
         if not isinstance(msg, dict):
-            raise ValueError("In the return value (a list) of the prompt_func, each " "message must be a dictionary")
+            raise ValueError("In the return value (a list) of the prompt_func, each message must be a dictionary")
 
         if "role" not in msg or "content" not in msg:
-            raise ValueError("In the return value (a list) of the prompt_func, each " "message must contain 'role' and 'content' keys")
+            raise ValueError("In the return value (a list) of the prompt_func, each message must contain 'role' and 'content' keys")
 
         if msg["role"] not in valid_roles:
-            raise ValueError(f"In the return value (a list) of the prompt_func, " f"each message role must be one of: {', '.join(sorted(valid_roles))}")
+            raise ValueError(f"In the return value (a list) of the prompt_func, each message role must be one of: {', '.join(sorted(valid_roles))}")
 
 
 @dataclass
@@ -137,7 +137,7 @@ class PromptFormatter:
                 try:
                     response_dict = json.loads(response_message)
                 except json.JSONDecodeError as e:
-                    logger.warning(f"Failed to parse response message as JSON: {response_message}. " f"The model likely returned an invalid JSON format.")
+                    logger.warning(f"Failed to parse response message as JSON: {response_message}. The model likely returned an invalid JSON format.")
                     raise e
             else:
                 response_dict = response_message

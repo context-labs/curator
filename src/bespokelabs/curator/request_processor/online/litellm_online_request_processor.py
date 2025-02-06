@@ -73,6 +73,11 @@ class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
         return self.config.model.split("/")[0]
 
     @property
+    def compatible_provider(self) -> str:
+        """Compatible provider property."""
+        return self._provider
+
+    @property
     def max_concurrent_requests(self) -> int | float:
         """Gets the maximum concurrent requests rate limit.
 
@@ -81,7 +86,7 @@ class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
         """
         max_concurrent_requests = super().max_concurrent_requests
         if max_concurrent_requests is None and self._concurrency_only_rate_limited:
-            logging.info("Current provider implements concurrency only rate limit, " f"Using default concurrency of {self.default_max_concurrent_requests}")
+            logging.info(f"Current provider implements concurrency only rate limit, Using default concurrency of {self.default_max_concurrent_requests}")
             return self.default_max_concurrent_requests
         return max_concurrent_requests
 
