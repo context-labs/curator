@@ -915,4 +915,57 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '{"batch": [{"properties": {"num_tasks_started": 1, "num_tasks_in_progress":
+      0, "num_tasks_succeeded": 1, "num_tasks_failed": 0, "num_tasks_already_completed":
+      0, "num_api_errors": 0, "num_other_errors": 0, "num_rate_limit_errors": 0, "available_request_capacity":
+      223.66380691528315, "available_token_capacity": 3224.276138305665, "last_update_time":
+      1738861747.6995578, "max_requests_per_minute": 10000, "max_tokens_per_minute":
+      200000, "max_concurrent_requests": null, "pbar": null, "response_cost": 0, "time_of_last_rate_limit_error":
+      0.0, "total_requests": 1, "total_prompt_tokens": 1148, "total_completion_tokens":
+      101, "total_tokens": 1249, "total_cost": 0.00023279999999999997, "input_cost_per_million":
+      0.15, "output_cost_per_million": 0.6, "start_time": 1738861746.35758, "model":
+      "gpt-4o-mini", "token_limit_strategy": "combined", "$lib": "posthog-python",
+      "$lib_version": "3.11.0", "$geoip_disable": true}, "timestamp": "2025-02-06T17:09:07.739784+00:00",
+      "context": {}, "distinct_id": "8bc1114c-711c-4838-8ddd-df221e60e765", "event":
+      "OnlineRequest"}], "historical_migration": false, "sentAt": "2025-02-06T17:09:08.447135+00:00",
+      "api_key": "phc_HGGTf1LmtsUnBaVBufgIwRsAwdkvH3cSsDKgW5RnJz8"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1203'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - posthog-python/3.11.0
+    method: POST
+    uri: https://us.i.posthog.com/batch/
+  response:
+    body:
+      string: '{"status":"Ok"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '15'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 06 Feb 2025 17:09:09 GMT
+      access-control-allow-credentials:
+      - 'true'
+      server:
+      - envoy
+      vary:
+      - origin, access-control-request-method, access-control-request-headers
+      x-envoy-upstream-service-time:
+      - '15'
+    status:
+      code: 200
+      message: OK
 version: 1

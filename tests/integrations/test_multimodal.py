@@ -72,12 +72,13 @@ def test_basic_multimodal_file_url(temp_working_dir):
         recipes = "".join([recipe[0] for recipe in dataset.to_pandas().values.tolist()])
         assert _hash_string(recipes) == hash_book[backend]
 
+
 @pytest.mark.parametrize("temp_working_dir", (_ONLINE_BACKENDS), indirect=True)
 def test_basic_multimodal_image_url_local(temp_working_dir):
     temp_working_dir, backend, vcr_config = temp_working_dir
     hash_book = {
         "openai": "10195c4d7ce82b24ca216bde881b2317d5eeafaa91d893d988362038c75434b1",
-        "litellm": "e31aa6465350a8385d7432d95b7107b7c191eb7e26af016c08b03e4ad9d45149",
+        "litellm": "84d673b735e1275304666b86bac457760b21bf94e8e27640aa2ac5bd2c14b576",
     }
 
     with vcr_config.use_cassette("basic_multimodal_image_url_local_completion.yaml"):

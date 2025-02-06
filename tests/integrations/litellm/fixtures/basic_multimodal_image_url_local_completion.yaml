@@ -314,13 +314,13 @@ interactions:
       Cross-Origin-Resource-Policy:
       - cross-origin
       Date:
-      - Thu, 06 Feb 2025 12:21:07 GMT
+      - Thu, 06 Feb 2025 17:08:16 GMT
       ETag:
       - W/"e633a88de495d1d942b030ce6ce78110440be3cf07f17e79690b788c357e7ba1"
       Expires:
-      - Thu, 06 Feb 2025 12:26:07 GMT
+      - Thu, 06 Feb 2025 17:13:16 GMT
       Source-Age:
-      - '53'
+      - '112'
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -330,19 +330,19 @@ interactions:
       X-Cache:
       - HIT
       X-Cache-Hits:
-      - '6'
+      - '5'
       X-Content-Type-Options:
       - nosniff
       X-Fastly-Request-ID:
-      - 1eaa564bcf4fa380faa71490c1da9c01cff44beb
+      - 9291ba1768a9eae270573bebd06b9ccc35e83ee0
       X-Frame-Options:
       - deny
       X-GitHub-Request-Id:
       - 1843:1BF95C:1937E4:24C6C3:67A4404D
       X-Served-By:
-      - cache-hyd1100032-HYD
+      - cache-hyd1100029-HYD
       X-Timer:
-      - S1738844468.987866,VS0,VE0
+      - S1738861697.530504,VS0,VE0
       X-XSS-Protection:
       - 1; mode=block
     status:
@@ -356,7 +356,7 @@ interactions:
       Accept-Encoding:
       - gzip, deflate
       Authorization:
-      - Bearer
+      - Bearer 
       Connection:
       - keep-alive
       Content-Length:
@@ -375,7 +375,7 @@ interactions:
         \"empty_array\"\n  }\n}"
     headers:
       CF-RAY:
-      - 90db19298fb43015-BOM
+      - 90dcbdc7cf891bd0-BOM
       Connection:
       - keep-alive
       Content-Length:
@@ -383,14 +383,14 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Feb 2025 12:21:09 GMT
+      - Thu, 06 Feb 2025 17:08:18 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=o4wVnRDPW1ExoGp66I6xgs2LRn.2OBJV4.kT7IyLaQ0-1738844469-1.0.1.1-rMgMT01VLxWxjv9H5Z8KbICnuKYxfDtfVTUi6c5RfAUL.X02PTrigst_WXPmJgZU3DR1WKbOc1onKUHV.NU2AA;
-        path=/; expires=Thu, 06-Feb-25 12:51:09 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=hnLRhdUb8oirVucXpnwy.8lMfDbTzhM5PIPKD8z1uz0-1738861698-1.0.1.1-LNo4QHMESxm7HCgg_k3Ry3Bi.E1rlZnBL_xLfnC_P0nuJ2T2Tnt5VKqsPJflwS_a0oLS3IMzUnuSCawwcz4CEQ;
+        path=/; expires=Thu, 06-Feb-25 17:38:18 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=xS03_l6vzL07XCOIwNJzQLRt66mQyUvlYMx1kViglX0-1738844469012-0.0.1.1-604800000;
+      - _cfuvid=s0zNAwcT_tmAaCy2lQYtMrMpVm9D.IOLrp5QwrTpdLg-1738861698099-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       X-Content-Type-Options:
       - nosniff
@@ -403,7 +403,7 @@ interactions:
       openai-organization:
       - personl-pozv85
       openai-processing-ms:
-      - '21'
+      - '17'
       openai-version:
       - '2020-10-01'
       strict-transport-security:
@@ -421,7 +421,7 @@ interactions:
       x-ratelimit-reset-tokens:
       - 4ms
       x-request-id:
-      - req_9247cc24e09afabb4c0fc2e6f2dc1f86
+      - req_a4515cf861e6901c3d229f94d2db06a9
     status:
       code: 400
       message: Bad Request
@@ -429,21 +429,20 @@ interactions:
     body: null
     headers:
       Authorization:
-      - Bearer
+      - Bearer 
     method: POST
     uri: https://api.openai.com/v1/chat/completions
   response:
     body:
-      string: "{\n  \"id\": \"chatcmpl-AxvAVe3KXcaJwtUzIGZ3oh5KrLXM7\",\n  \"object\":
-        \"chat.completion\",\n  \"created\": 1738844471,\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n
+      string: "{\n  \"id\": \"chatcmpl-AxzeOdZ2Gmy0hhMKZuXU6IT1PDER5\",\n  \"object\":
+        \"chat.completion\",\n  \"created\": 1738861700,\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n
         \ \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\":
         \"assistant\",\n        \"content\": \"The image appears to be a simple black
-        silhouette of a bird in flight. It features a streamlined body and wings outstretched,
-        suggesting movement. The overall design is minimalist, emphasizing the shape
-        of the bird rather than any detailed features.\",\n        \"refusal\": null\n
-        \     },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n
-        \ ],\n  \"usage\": {\n    \"prompt_tokens\": 306,\n    \"completion_tokens\":
-        48,\n    \"total_tokens\": 354,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\":
+        silhouette of a cat. It has pointed ears, a rounded body, and a long tail.
+        The cat is depicted in a sitting position, giving it a cute and playful appearance.\",\n
+        \       \"refusal\": null\n      },\n      \"logprobs\": null,\n      \"finish_reason\":
+        \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 450,\n    \"completion_tokens\":
+        45,\n    \"total_tokens\": 495,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\":
         0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\":
         {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\":
         0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\":
@@ -452,7 +451,7 @@ interactions:
       Access-Control-Expose-Headers:
       - X-Request-ID
       CF-RAY:
-      - 90db19343b2840d5-BOM
+      - 90dcbdd6ac833006-BOM
       Connection:
       - keep-alive
       Content-Encoding:
@@ -460,14 +459,14 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Feb 2025 12:21:12 GMT
+      - Thu, 06 Feb 2025 17:08:21 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=zckP8dyOH2v9b7ngdDgWhEL8TPORQD6bMQgMRG8E9U0-1738844472-1.0.1.1-xK1_GuPhiGtvQOoEHSrP92MLGXB6gUjGVJ7bPVZG3lRqc0dIge9JY3y0U.RpJmmr5Ceg0RwdgjdDAOe2FpTJHw;
-        path=/; expires=Thu, 06-Feb-25 12:51:12 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=uAMD11nYEJJ65NhZQ5W55KtwQbniECQqtM4ylShd.eM-1738861701-1.0.1.1-2H2928TAQ18q__H1njJ2KvIHR7asj.W3yeEczywlSdmk76HUt2w80PU2am_.X9wfwcsoTb3PHFBpjHfQCc5LrA;
+        path=/; expires=Thu, 06-Feb-25 17:38:21 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=G_YX7Fm8y2Ipm.xTIpcZwzju6TIj_cnzo0A5CCBW7OQ-1738844472067-0.0.1.1-604800000;
+      - _cfuvid=peNEoQ70hXN59ZXaCtCTXJC19pNeijkNhW.VrpKnjTA-1738861701405-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       Transfer-Encoding:
       - chunked
@@ -480,7 +479,7 @@ interactions:
       openai-organization:
       - personl-pozv85
       openai-processing-ms:
-      - '1335'
+      - '1486'
       openai-version:
       - '2020-10-01'
       strict-transport-security:
@@ -496,69 +495,15 @@ interactions:
       x-ratelimit-remaining-requests:
       - '9998'
       x-ratelimit-remaining-tokens:
-      - '199213'
+      - '199212'
       x-ratelimit-reset-input-images:
       - 1ms
       x-ratelimit-reset-requests:
-      - 15.548s
+      - 15.471s
       x-ratelimit-reset-tokens:
       - 236ms
       x-request-id:
-      - req_97fa5d455ac314b1b3157a73b6521d9e
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"batch": [{"properties": {"num_tasks_started": 1, "num_tasks_in_progress":
-      0, "num_tasks_succeeded": 1, "num_tasks_failed": 0, "num_tasks_already_completed":
-      0, "num_api_errors": 0, "num_other_errors": 0, "num_rate_limit_errors": 0, "available_request_capacity":
-      412.2551441192628, "available_token_capacity": {"input": 38548.51441192626,
-      "output": 8076.102882385252}, "last_update_time": 1738864089.028047, "max_requests_per_minute":
-      4000, "max_tokens_per_minute": {"input": 400000, "output": 80000}, "max_concurrent_requests":
-      null, "pbar": null, "response_cost": 0, "time_of_last_rate_limit_error": 0.0,
-      "total_requests": 1, "total_prompt_tokens": 2677, "total_completion_tokens":
-      169, "total_tokens": 2846, "total_cost": 0.010565999999999999, "input_cost_per_million":
-      0.0, "output_cost_per_million": 0.0, "start_time": 1738864082.844222, "model":
-      "anthropic/claude-3-5-sonnet-20241022", "token_limit_strategy": "seperate",
-      "$lib": "posthog-python", "$lib_version": "3.11.0", "$geoip_disable": true},
-      "timestamp": "2025-02-06T17:48:09.063719+00:00", "context": {}, "distinct_id":
-      "8bc1114c-711c-4838-8ddd-df221e60e765", "event": "OnlineRequest"}], "historical_migration":
-      false, "sentAt": "2025-02-06T17:48:09.346641+00:00", "api_key": "phc_HGGTf1LmtsUnBaVBufgIwRsAwdkvH3cSsDKgW5RnJz8"}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '1291'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - posthog-python/3.11.0
-    method: POST
-    uri: https://us.i.posthog.com/batch/
-  response:
-    body:
-      string: '{"status":"Ok"}'
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '15'
-      Content-Type:
-      - application/json
-      Date:
-      - Thu, 06 Feb 2025 17:48:10 GMT
-      access-control-allow-credentials:
-      - 'true'
-      server:
-      - envoy
-      vary:
-      - origin, access-control-request-method, access-control-request-headers
-      x-envoy-upstream-service-time:
-      - '63'
+      - req_9b2d3ad4df03a851d0e1dfb93763502c
     status:
       code: 200
       message: OK
