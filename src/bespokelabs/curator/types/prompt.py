@@ -12,29 +12,8 @@ from pydantic import BaseModel, ConfigDict, Field, field_serializer, model_valid
 class BaseType(BaseModel):
     """A class to represent the base type for multimodal prompts."""
 
-    type: t.ClassVar[str] = Field(..., description="The type of the multimodal prompt.")
-
-
-def _pil_image_to_bytes(image: PIL_Image.Image) -> bytes:
-    buffer = BytesIO()
-    image.save(buffer, format="PNG")
-    return buffer.getvalue()
-
-
-def _pil_to_base64(image: PIL_Image.Image) -> str:
-    b = _pil_image_to_bytes(image)
-    return base64.b64encode(b).decode("utf-8")
-
-
-class Image(BaseType):
-    """A class to represent an image for multimodal prompts."""
-
     url: str = Field("", description="The URL of the image.")
-    content: bytes | PIL_Image.Image | str = Field("", description="Image content bytes.")
-    detail: str = Field("auto", description="Details about the image. Note 'auto' is only supported for OpenAI client.")
-    model_config = ConfigDict(arbitrary_types_allowed=True)
-
-    type: t.ClassVar[str] = "image"
+    type: t.ClassVar[str] = Field(..., description="The type of the multimodal prompt.")
 
     @staticmethod
     def _is_local_uri(path):
@@ -51,6 +30,27 @@ class Image(BaseType):
         if self.url:
             return self._is_local_uri(self.url)
         return False
+
+
+def _pil_image_to_bytes(image: PIL_Image.Image) -> bytes:
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    return buffer.getvalue()
+
+
+def _pil_to_base64(image: PIL_Image.Image) -> str:
+    b = _pil_image_to_bytes(image)
+    return base64.b64encode(b).decode("utf-8")
+
+
+class Image(BaseType):
+    """A class to represent an image for multimodal prompts."""
+
+    content: bytes | PIL_Image.Image | str = Field("", description="Image content bytes.")
+    detail: str = Field("auto", description="Details about the image. Note 'auto' is only supported for OpenAI client.")
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    type: t.ClassVar[str] = "image"
 
     def serialize(self) -> str:
         """Convert image content to base64."""
@@ -93,6 +93,12 @@ class File(BaseType):
         if not self.mime_type:
             mime_type, _ = mimetypes.guess_type(self.url)
             self.mime_type = mime_type.lower()
+
+    def serialize(self) -> str:
+        """Convert file to base64."""
+        if self.is_local:
+            return self._load_file_as_b64(self.url)
+        return self.url
 
 
 class _MultiModalPrompt(BaseType):
