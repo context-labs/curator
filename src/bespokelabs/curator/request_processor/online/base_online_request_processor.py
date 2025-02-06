@@ -136,9 +136,9 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
 
     def _handle_multi_modal_prompt(self, message):
         def _openai_mutlimodal_format(data, mime_type="image/png"):
-            if data.url:
+            if image.url and not image.is_local:
                 return {"type": "image_url", "image_url": {"url": data.url}}
-            elif data.content:
+            else:
                 base64_content = data.serialize()
                 self.file_upload_limit_check(base64_content)
 

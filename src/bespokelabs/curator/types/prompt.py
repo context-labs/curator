@@ -1,6 +1,7 @@
 # Description: Pydantic models for multimodal prompts.
 import base64
 import mimetypes
+import os
 import typing as t
 from io import BytesIO
 
@@ -35,10 +36,29 @@ class Image(BaseType):
 
     type: t.ClassVar[str] = "image"
 
+    @staticmethod
+    def _is_local_uri(path):
+        return os.path.exists(path) and os.path.isfile(path)
+
+    @staticmethod
+    def _load_file_as_b64(path):
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode("utf-8")
+
+    @property
+    def is_local(self):
+        """Check if the image is a local file."""
+        if self.url:
+            return self._is_local_uri(self.url)
+        return False
+
     def serialize(self) -> str:
         """Convert image content to base64."""
         if self.url:
+            if self.is_local:
+                return self._load_file_as_b64(self.url)
             return self.url
+
         assert self.content, "Image content is not provided."
         if isinstance(self.content, PIL_Image.Image):
             self.content = _pil_image_to_bytes(self.content)
