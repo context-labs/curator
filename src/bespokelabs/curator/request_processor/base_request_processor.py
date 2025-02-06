@@ -472,7 +472,7 @@ class BaseRequestProcessor(ABC):
                 sample=json.dumps(dataset[0], indent=4),
             )
         )
-        card.push_to_hub(repo_id, **kwargs)
+        card.push_to_hub(repo_id)
 
     def validate_existing_response_file(self, response_file: str) -> set[int]:
         """Parse an existing response file to identify completed requests and removes failed requests.
