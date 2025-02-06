@@ -148,6 +148,8 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
                         "url": f"data:{mime_type};base64,{base64_content}",
                     },
                 }
+                if mime_type == "image/png":
+                    content["image_url"].update({"detail": data.detail})
                 return content
 
         content = []

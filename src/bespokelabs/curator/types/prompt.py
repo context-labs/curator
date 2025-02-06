@@ -30,6 +30,7 @@ class Image(BaseType):
 
     url: str = Field("", description="The URL of the image.")
     content: bytes | PIL_Image.Image | str = Field("", description="Image content bytes.")
+    detail: str = Field("auto", description="Details about the image. Note 'auto' is only supported for OpenAI client.")
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     type: t.ClassVar[str] = "image"
