@@ -228,7 +228,7 @@ class BaseRequestProcessor(ABC):
         if dataset is None:
             with open(request_file, "w") as f:
                 generic_request = self.prompt_formatter.create_generic_request(dict(), 0)  # noqa: C408
-                if generic_request.multimodal_prompt is True:
+                if generic_request.is_multimodal_prompt is True:
                     assert self._multimodal_prompt_supported, "Requested processor does not support multimodal prompts."
 
                 generic_request.generation_params = self.config.generation_params
