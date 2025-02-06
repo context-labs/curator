@@ -21,6 +21,7 @@ def calculate_input_tokens(message, token_encoding) -> int:
                 tokens += len(token_encoding.encode(str(msg), disallowed_special=()))
             else:
                 msg = msg["image_url"]
+                # Note: Currently estimating low res image tokens. Need to add logic for high res images
                 tokens += _OPENAI_TOKENS_PER_IMAGE["low"]
 
         return tokens
