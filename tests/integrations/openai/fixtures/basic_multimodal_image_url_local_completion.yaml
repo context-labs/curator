@@ -314,13 +314,13 @@ interactions:
       Cross-Origin-Resource-Policy:
       - cross-origin
       Date:
-      - Thu, 06 Feb 2025 12:17:57 GMT
+      - Thu, 06 Feb 2025 12:21:07 GMT
       ETag:
       - W/"e633a88de495d1d942b030ce6ce78110440be3cf07f17e79690b788c357e7ba1"
       Expires:
-      - Thu, 06 Feb 2025 12:22:57 GMT
+      - Thu, 06 Feb 2025 12:26:07 GMT
       Source-Age:
-      - '165'
+      - '53'
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -330,19 +330,19 @@ interactions:
       X-Cache:
       - HIT
       X-Cache-Hits:
-      - '19'
+      - '6'
       X-Content-Type-Options:
       - nosniff
       X-Fastly-Request-ID:
-      - effd2a6ee966c748dfd35c3c14c878278d57f482
+      - 1eaa564bcf4fa380faa71490c1da9c01cff44beb
       X-Frame-Options:
       - deny
       X-GitHub-Request-Id:
       - 1843:1BF95C:1937E4:24C6C3:67A4404D
       X-Served-By:
-      - cache-hyd1100025-HYD
+      - cache-hyd1100032-HYD
       X-Timer:
-      - S1738844278.538196,VS0,VE0
+      - S1738844468.987866,VS0,VE0
       X-XSS-Protection:
       - 1; mode=block
     status:
@@ -375,7 +375,7 @@ interactions:
         \"empty_array\"\n  }\n}"
     headers:
       CF-RAY:
-      - 90db1483495a3c0a-BOM
+      - 90db19298fb43015-BOM
       Connection:
       - keep-alive
       Content-Length:
@@ -383,14 +383,14 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Feb 2025 12:17:58 GMT
+      - Thu, 06 Feb 2025 12:21:09 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=.yvOyMZlIBNeOC.K7XMVsFsi5dzGqA1kzVoFj5oV2hw-1738844278-1.0.1.1-WdRADQIZmpYKbP5g2hDos4FShTNWjoH.fgQaxDqUXm.QRzz5ixx4JC6N.HQfhQ_thbFVauF2zY1oJ7sD7ZVCHg;
-        path=/; expires=Thu, 06-Feb-25 12:47:58 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=o4wVnRDPW1ExoGp66I6xgs2LRn.2OBJV4.kT7IyLaQ0-1738844469-1.0.1.1-rMgMT01VLxWxjv9H5Z8KbICnuKYxfDtfVTUi6c5RfAUL.X02PTrigst_WXPmJgZU3DR1WKbOc1onKUHV.NU2AA;
+        path=/; expires=Thu, 06-Feb-25 12:51:09 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=jE019Vd_5BOJ3zTNjze0Diq_MCozBH3uAZNN3Czbqe0-1738844278596-0.0.1.1-604800000;
+      - _cfuvid=xS03_l6vzL07XCOIwNJzQLRt66mQyUvlYMx1kViglX0-1738844469012-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       X-Content-Type-Options:
       - nosniff
@@ -403,7 +403,7 @@ interactions:
       openai-organization:
       - personl-pozv85
       openai-processing-ms:
-      - '32'
+      - '21'
       openai-version:
       - '2020-10-01'
       strict-transport-security:
@@ -421,7 +421,7 @@ interactions:
       x-ratelimit-reset-tokens:
       - 4ms
       x-request-id:
-      - req_6fb2f320c0f4d960e2f494daaa5ed242
+      - req_9247cc24e09afabb4c0fc2e6f2dc1f86
     status:
       code: 400
       message: Bad Request
@@ -434,20 +434,17 @@ interactions:
     uri: https://api.openai.com/v1/chat/completions
   response:
     body:
-      string: "{\n  \"id\": \"chatcmpl-Axv7SvbswHb24x1g8ZDTTyKeteoYo\",\n  \"object\":
-        \"chat.completion\",\n  \"created\": 1738844282,\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n
+      string: "{\n  \"id\": \"chatcmpl-AxvAVe3KXcaJwtUzIGZ3oh5KrLXM7\",\n  \"object\":
+        \"chat.completion\",\n  \"created\": 1738844471,\n  \"model\": \"gpt-4o-mini-2024-07-18\",\n
         \ \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\":
-        \"assistant\",\n        \"content\": \"The image features a dessert presentation
-        with a tall glass filled with a frothy beverage. The drink has a rich, chocolatey
-        appearance and is topped with a layer of foam. A striped straw protrudes from
-        the glass. \\n\\nNearby, on a light gray platter, there are several dessert
-        items, including dark chocolate squares and small cubes that look like marshmallows
-        or other confections. The setting has a modern aesthetic, highlighted by a
-        wooden serving board and a dark background that contrasts with the lighter
-        elements of the platter.\",\n        \"refusal\": null\n      },\n      \"logprobs\":
-        null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\":
-        1148,\n    \"completion_tokens\": 105,\n    \"total_tokens\": 1253,\n    \"prompt_tokens_details\":
-        {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\":
+        \"assistant\",\n        \"content\": \"The image appears to be a simple black
+        silhouette of a bird in flight. It features a streamlined body and wings outstretched,
+        suggesting movement. The overall design is minimalist, emphasizing the shape
+        of the bird rather than any detailed features.\",\n        \"refusal\": null\n
+        \     },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n
+        \ ],\n  \"usage\": {\n    \"prompt_tokens\": 306,\n    \"completion_tokens\":
+        48,\n    \"total_tokens\": 354,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\":
+        0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\":
         {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\":
         0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\":
         \"default\",\n  \"system_fingerprint\": \"fp_bd83329f63\"\n}\n"
@@ -455,7 +452,7 @@ interactions:
       Access-Control-Expose-Headers:
       - X-Request-ID
       CF-RAY:
-      - 90db148eba733227-BOM
+      - 90db19343b2840d5-BOM
       Connection:
       - keep-alive
       Content-Encoding:
@@ -463,14 +460,14 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Feb 2025 12:18:07 GMT
+      - Thu, 06 Feb 2025 12:21:12 GMT
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=kSO9Sm4fhnBoaZGFKeE7kZ2XryPlzTsv94C..MhEmr8-1738844287-1.0.1.1-e6Cpw.EQBLz69kZ66lOBuvBL.SKSXuZOzx8iPrrSSEiN2_47tMO5zpxzeuf5fpm26Ly5DMMzM.6J6FW_yZvp9Q;
-        path=/; expires=Thu, 06-Feb-25 12:48:07 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=zckP8dyOH2v9b7ngdDgWhEL8TPORQD6bMQgMRG8E9U0-1738844472-1.0.1.1-xK1_GuPhiGtvQOoEHSrP92MLGXB6gUjGVJ7bPVZG3lRqc0dIge9JY3y0U.RpJmmr5Ceg0RwdgjdDAOe2FpTJHw;
+        path=/; expires=Thu, 06-Feb-25 12:51:12 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=3Pvp7irZmfxuoRNbECNARQr9IbUfHQKXAAA09C818TQ-1738844287500-0.0.1.1-604800000;
+      - _cfuvid=G_YX7Fm8y2Ipm.xTIpcZwzju6TIj_cnzo0A5CCBW7OQ-1738844472067-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       Transfer-Encoding:
       - chunked
@@ -483,7 +480,7 @@ interactions:
       openai-organization:
       - personl-pozv85
       openai-processing-ms:
-      - '7086'
+      - '1335'
       openai-version:
       - '2020-10-01'
       strict-transport-security:
@@ -499,310 +496,16 @@ interactions:
       x-ratelimit-remaining-requests:
       - '9998'
       x-ratelimit-remaining-tokens:
-      - '199212'
+      - '199213'
       x-ratelimit-reset-input-images:
       - 1ms
       x-ratelimit-reset-requests:
-      - 15.444s
+      - 15.548s
       x-ratelimit-reset-tokens:
       - 236ms
       x-request-id:
-      - req_07e81d25211576f22e04b785f9061b6a
+      - req_97fa5d455ac314b1b3157a73b6521d9e
     status:
       code: 200
       message: OK
-- request:
-    body: '{"model": "gpt-4o-mini", "messages": []}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Authorization:
-      - Bearer sk-mocked-**
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '40'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - python-requests/2.32.3
-    method: POST
-    uri: https://api.openai.com/v1/chat/completions
-  response:
-    body:
-      string: "{\n    \"error\": {\n        \"message\": \"Incorrect API key provided:
-        sk-mocked-**. You can find your API key at https://platform.openai.com/account/api-keys.\",\n
-        \       \"type\": \"invalid_request_error\",\n        \"param\": null,\n        \"code\":
-        \"invalid_api_key\"\n    }\n}\n"
-    headers:
-      CF-RAY:
-      - 90db15871e902ffd-BOM
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '262'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 06 Feb 2025 12:18:40 GMT
-      Server:
-      - cloudflare
-      Set-Cookie:
-      - __cf_bm=52xi2bN0HFBAye3JU_mXO0QjdHZajKlEHhQhWBZKdK4-1738844320-1.0.1.1-dDl.0.z4fe4x7a1AnD.T45cFMKsYwiih1QmelaTpO4sBuUsNCAgQmB0Rg3OBLptSsJU4qeIKlygoQo1bHJmNJg;
-        path=/; expires=Thu, 06-Feb-25 12:48:40 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=ubR9eVzlON.vvDI9Ol5o2BWLerXZ399snWXKcKtmbPA-1738844320176-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      vary:
-      - Origin
-      x-request-id:
-      - req_9fbf0ac90365503cd5aa305c24538c69
-    status:
-      code: 401
-      message: Unauthorized
-- request:
-    body: '{"batch": [{"properties": {"num_tasks_started": 1, "num_tasks_in_progress":
-      0, "num_tasks_succeeded": 1, "num_tasks_failed": 0, "num_tasks_already_completed":
-      0, "num_api_errors": 0, "num_other_errors": 0, "num_rate_limit_errors": 0, "available_request_capacity":
-      220.0668652852376, "available_token_capacity": 3148.337305704754, "last_update_time":
-      1738844319.7259781, "max_requests_per_minute": 10000, "max_tokens_per_minute":
-      200000, "max_concurrent_requests": null, "pbar": null, "response_cost": 0, "time_of_last_rate_limit_error":
-      0.0, "total_requests": 1, "total_prompt_tokens": 1148, "total_completion_tokens":
-      105, "total_tokens": 1253, "total_cost": 0.00023519999999999997, "input_cost_per_million":
-      0.15, "output_cost_per_million": 0.6, "start_time": 1738844318.405579, "model":
-      "gpt-4o-mini", "token_limit_strategy": "combined", "$lib": "posthog-python",
-      "$lib_version": "3.11.0", "$geoip_disable": true}, "timestamp": "2025-02-06T12:18:39.738251+00:00",
-      "context": {}, "distinct_id": "8bc1114c-711c-4838-8ddd-df221e60e765", "event":
-      "OnlineRequest"}], "historical_migration": false, "sentAt": "2025-02-06T12:18:40.239222+00:00",
-      "api_key": "phc_HGGTf1LmtsUnBaVBufgIwRsAwdkvH3cSsDKgW5RnJz8"}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '1203'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - posthog-python/3.11.0
-    method: POST
-    uri: https://us.i.posthog.com/batch/
-  response:
-    body:
-      string: '{"status":"Ok"}'
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '15'
-      Content-Type:
-      - application/json
-      Date:
-      - Thu, 06 Feb 2025 12:18:41 GMT
-      access-control-allow-credentials:
-      - 'true'
-      server:
-      - envoy
-      vary:
-      - origin, access-control-request-method, access-control-request-headers
-      x-envoy-upstream-service-time:
-      - '59'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Authorization:
-      - Bearer sk-mocked-**
-      Cookie:
-      - __cf_bm=52xi2bN0HFBAye3JU_mXO0QjdHZajKlEHhQhWBZKdK4-1738844320-1.0.1.1-dDl.0.z4fe4x7a1AnD.T45cFMKsYwiih1QmelaTpO4sBuUsNCAgQmB0Rg3OBLptSsJU4qeIKlygoQo1bHJmNJg;
-        _cfuvid=ubR9eVzlON.vvDI9Ol5o2BWLerXZ399snWXKcKtmbPA-1738844320176-0.0.1.1-604800000
-    method: POST
-    uri: https://api.openai.com/v1/chat/completions
-  response:
-    body:
-      string: "{\n    \"error\": {\n        \"message\": \"Incorrect API key provided:
-        sk-mocked-**. You can find your API key at https://platform.openai.com/account/api-keys.\",\n
-        \       \"type\": \"invalid_request_error\",\n        \"param\": null,\n        \"code\":
-        \"invalid_api_key\"\n    }\n}\n"
-    headers:
-      CF-RAY:
-      - 90db15aafd25446d-BOM
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '262'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 06 Feb 2025 12:18:45 GMT
-      Server:
-      - cloudflare
-      Set-Cookie:
-      - __cf_bm=shSRPL0zU2goy6QTJa2qxQYJjK6GUaZ_uD7D4Nc63CE-1738844325-1.0.1.1-_p3EAIulEwU0R4eWJa1EckWPndWJYeBZ4nvU26BftXX92napJLCFLvWJ6JdxJUUioCwhOS8_n_.rp7Osf6BDOA;
-        path=/; expires=Thu, 06-Feb-25 12:48:45 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=8VqEu4_pfcFVP2uQZD7ME2gvmIDleqDmeCALB2fOWrY-1738844325873-0.0.1.1-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
-      Vary:
-      - Origin
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-request-id:
-      - req_56b12382a07f0d353955f0ea1a43085a
-    status:
-      code: 401
-      message: Unauthorized
-- request:
-    body: null
-    headers:
-      Authorization:
-      - Bearer sk-mocked-**
-      Cookie:
-      - __cf_bm=shSRPL0zU2goy6QTJa2qxQYJjK6GUaZ_uD7D4Nc63CE-1738844325-1.0.1.1-_p3EAIulEwU0R4eWJa1EckWPndWJYeBZ4nvU26BftXX92napJLCFLvWJ6JdxJUUioCwhOS8_n_.rp7Osf6BDOA;
-        _cfuvid=8VqEu4_pfcFVP2uQZD7ME2gvmIDleqDmeCALB2fOWrY-1738844325873-0.0.1.1-604800000
-    method: POST
-    uri: https://api.openai.com/v1/chat/completions
-  response:
-    body:
-      string: "{\n    \"error\": {\n        \"message\": \"Incorrect API key provided:
-        sk-mocked-**. You can find your API key at https://platform.openai.com/account/api-keys.\",\n
-        \       \"type\": \"invalid_request_error\",\n        \"param\": null,\n        \"code\":
-        \"invalid_api_key\"\n    }\n}\n"
-    headers:
-      CF-RAY:
-      - 90db15cb4a1e446d-BOM
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '262'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 06 Feb 2025 12:18:51 GMT
-      Server:
-      - cloudflare
-      Vary:
-      - Origin
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-request-id:
-      - req_f1489e06dee34c0784c2bd700e12be27
-    status:
-      code: 401
-      message: Unauthorized
-- request:
-    body: null
-    headers:
-      Authorization:
-      - Bearer sk-mocked-**
-      Cookie:
-      - __cf_bm=shSRPL0zU2goy6QTJa2qxQYJjK6GUaZ_uD7D4Nc63CE-1738844325-1.0.1.1-_p3EAIulEwU0R4eWJa1EckWPndWJYeBZ4nvU26BftXX92napJLCFLvWJ6JdxJUUioCwhOS8_n_.rp7Osf6BDOA;
-        _cfuvid=8VqEu4_pfcFVP2uQZD7ME2gvmIDleqDmeCALB2fOWrY-1738844325873-0.0.1.1-604800000
-    method: POST
-    uri: https://api.openai.com/v1/chat/completions
-  response:
-    body:
-      string: "{\n    \"error\": {\n        \"message\": \"Incorrect API key provided:
-        sk-mocked-**. You can find your API key at https://platform.openai.com/account/api-keys.\",\n
-        \       \"type\": \"invalid_request_error\",\n        \"param\": null,\n        \"code\":
-        \"invalid_api_key\"\n    }\n}\n"
-    headers:
-      CF-RAY:
-      - 90db15eb8cc5446d-BOM
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '262'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 06 Feb 2025 12:18:56 GMT
-      Server:
-      - cloudflare
-      Vary:
-      - Origin
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-request-id:
-      - req_dcbc1a90469e274d45f4ddf49759f295
-    status:
-      code: 401
-      message: Unauthorized
-- request:
-    body: null
-    headers:
-      Authorization:
-      - Bearer sk-mocked-**
-      Cookie:
-      - __cf_bm=shSRPL0zU2goy6QTJa2qxQYJjK6GUaZ_uD7D4Nc63CE-1738844325-1.0.1.1-_p3EAIulEwU0R4eWJa1EckWPndWJYeBZ4nvU26BftXX92napJLCFLvWJ6JdxJUUioCwhOS8_n_.rp7Osf6BDOA;
-        _cfuvid=8VqEu4_pfcFVP2uQZD7ME2gvmIDleqDmeCALB2fOWrY-1738844325873-0.0.1.1-604800000
-    method: POST
-    uri: https://api.openai.com/v1/chat/completions
-  response:
-    body:
-      string: "{\n    \"error\": {\n        \"message\": \"Incorrect API key provided:
-        sk-mocked-**. You can find your API key at https://platform.openai.com/account/api-keys.\",\n
-        \       \"type\": \"invalid_request_error\",\n        \"param\": null,\n        \"code\":
-        \"invalid_api_key\"\n    }\n}\n"
-    headers:
-      CF-RAY:
-      - 90db160bff00446d-BOM
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '262'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 06 Feb 2025 12:19:01 GMT
-      Server:
-      - cloudflare
-      Vary:
-      - Origin
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-request-id:
-      - req_34561fd8c5fda8452404cf31717021a6
-    status:
-      code: 401
-      message: Unauthorized
 version: 1

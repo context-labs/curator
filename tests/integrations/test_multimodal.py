@@ -1,4 +1,5 @@
 import hashlib
+import os
 
 import pytest
 from datasets import Dataset
@@ -41,8 +42,8 @@ def test_basic_multimodal(temp_working_dir):
 def test_basic_multimodal_image_url(temp_working_dir):
     temp_working_dir, backend, vcr_config = temp_working_dir
     hash_book = {
-        "openai": "63b7f3bca97585975b8cb698956aa0b40d584b120fd1d4cf51825fc1c5d3506d",
         "litellm": "342e75c8d52cdf6edb7deaf9a5a8621f889ce0cadf2a8129e6f029f2191640dd",
+        "openai": "3204d6666cba4fc8d94411192b6224aa2e656cd6ef5f5f40c297934b5dc90efb",
     }
 
     dataset = Dataset.from_dict({"image": ["https://images.pexels.com/photos/1684880/pexels-photo-1684880.jpeg"], "text": ["Describe the image"]})
@@ -67,6 +68,26 @@ def test_basic_multimodal_file_url(temp_working_dir):
     with vcr_config.use_cassette("basic_multimodal_file_url_completion.yaml"):
         model_name = "anthropic/claude-3-5-sonnet-20241022"
         prompter = helper.create_multimodal_llm(model=model_name, backend=backend, input_type="file")
+        dataset = prompter(dataset=dataset, working_dir=temp_working_dir)
+        recipes = "".join([recipe[0] for recipe in dataset.to_pandas().values.tolist()])
+        assert _hash_string(recipes) == hash_book[backend]
+
+@pytest.mark.parametrize("temp_working_dir", (_ONLINE_BACKENDS), indirect=True)
+def test_basic_multimodal_image_url_local(temp_working_dir):
+    temp_working_dir, backend, vcr_config = temp_working_dir
+    hash_book = {
+        "openai": "10195c4d7ce82b24ca216bde881b2317d5eeafaa91d893d988362038c75434b1",
+        "litellm": "e31aa6465350a8385d7432d95b7107b7c191eb7e26af016c08b03e4ad9d45149",
+    }
+
+    with vcr_config.use_cassette("basic_multimodal_image_url_local_completion.yaml"):
+        # Test local image path
+        black_image = Image.new("RGB", (512, 512), color="black")
+        local_path = os.path.join(temp_working_dir, "black_image.png")
+        black_image.save(local_path)
+        dataset = Dataset.from_dict({"image": [local_path], "text": ["Describe the image"]})
+
+        prompter = helper.create_multimodal_llm()
         dataset = prompter(dataset=dataset, working_dir=temp_working_dir)
         recipes = "".join([recipe[0] for recipe in dataset.to_pandas().values.tolist()])
         assert _hash_string(recipes) == hash_book[backend]
