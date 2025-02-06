@@ -1,6 +1,5 @@
 from bespokelabs import curator
 
-
 # Get an API key at https://inference.net
 # Export your API key as INFERENCE_API_KEY
 # inference.net currently only supports a 24h completion window

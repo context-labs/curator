@@ -74,7 +74,7 @@ class OpenAIRequestMixin:
                 base64_image = image.serialize()
                 mb = get_base64_size(base64_image)
                 if mb > _OPENAI_ALLOWED_IMAGE_SIZE_MB:
-                    raise ValueError(f"Image size is {mb} MB, which is greater than the " f"allowed size of {_OPENAI_ALLOWED_IMAGE_SIZE_MB} MB in OpenAI.")
+                    raise ValueError(f"Image size is {mb} MB, which is greater than the allowed size of {_OPENAI_ALLOWED_IMAGE_SIZE_MB} MB in OpenAI.")
 
                 # TODO: add detail option in Image types.
                 content.append(

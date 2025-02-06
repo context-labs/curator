@@ -36,7 +36,7 @@ class CodeExecutionStatusTracker:
         self._console = Console() if console is None else console
         self._progress = Progress(
             TextColumn(
-                "[cyan]{task.description}[/cyan]\n" "{task.fields[requests_text]}\n" "{task.fields[time_text]}",
+                "[cyan]{task.description}[/cyan]\n{task.fields[requests_text]}\n{task.fields[time_text]}",
                 justify="left",
             ),
             TextColumn("\n\n\n"),  # Spacer
