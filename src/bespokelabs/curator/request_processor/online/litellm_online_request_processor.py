@@ -71,6 +71,11 @@ class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
         return self.config.model.split("/")[0]
 
     @property
+    def compatible_provider(self) -> str:
+        """Compatible provider property."""
+        return self._provider
+
+    @property
     def max_concurrent_requests(self) -> int | float:
         """Gets the maximum concurrent requests rate limit.
 

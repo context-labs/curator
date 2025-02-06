@@ -94,6 +94,11 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
         """Backend property."""
         return "base"
 
+    @property
+    def compatible_provider(self) -> str:
+        """Compatible provider property."""
+        return "base"
+
     def validate_config(self):
         """Validate online request processor configuration.
 
@@ -256,6 +261,7 @@ class BaseOnlineRequestProcessor(BaseRequestProcessor, ABC):
             token_limit_strategy=self.token_limit_strategy,
             max_requests_per_minute=self.max_requests_per_minute,
             max_tokens_per_minute=self.max_tokens_per_minute,
+            compatible_provider=self.compatible_provider,
         )
 
         completed_request_ids = self.validate_existing_response_file(response_file)
