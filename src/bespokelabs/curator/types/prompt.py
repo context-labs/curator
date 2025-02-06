@@ -12,7 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_serializer, model_valid
 class BaseType(BaseModel):
     """A class to represent the base type for multimodal prompts."""
 
-    url: str = Field("", description="The URL of the image.")
+    url: str = Field("", description="The URL of the file.")
     type: t.ClassVar[str] = Field(..., description="The type of the multimodal prompt.")
 
     @staticmethod
@@ -84,7 +84,6 @@ class Image(BaseType):
 class File(BaseType):
     """A class to represent a file for multimodal prompts."""
 
-    url: str = Field(..., description="The URL of the file.")
     mime_type: str | None = Field(None, description="The MIME type of the file.")
     type: t.ClassVar[str] = "file"
 
