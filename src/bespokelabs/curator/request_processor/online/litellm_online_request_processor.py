@@ -340,9 +340,10 @@ class LiteLLMOnlineRequestProcessor(BaseOnlineRequestProcessor):
                     timeout=self.config.request_timeout,
                 )
                 response_message = response.model_dump() if hasattr(response, "model_dump") else response
-                response_message = response.model_dump() if hasattr(response, "model_dump") else response
             else:
                 completion_obj = await litellm.acompletion(**request.api_specific_request, timeout=self.config.request_timeout)
+                if completion_obj is None:
+                    raise Exception("Response is empty")
                 if self.config.return_completions_object:
                     response_message = dict(completion_obj)
                 else:

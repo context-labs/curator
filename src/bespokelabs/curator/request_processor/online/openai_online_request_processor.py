@@ -221,7 +221,9 @@ class OpenAIOnlineRequestProcessor(BaseOnlineRequestProcessor, OpenAIRequestMixi
         ) as response_obj:
             response = await response_obj.json()
 
-            if "error" in response:
+            if response is None:
+                raise Exception("Response is empty")
+            elif "error" in response:
                 status_tracker.num_api_errors += 1
                 error = response["error"]
                 error_message = error if isinstance(error, str) else error.get("message", "")

@@ -30,8 +30,27 @@
 [ English | <a href="README_zh.md">中文</a> ]
 </div>
 
-## 🎉 What's New 
+## NOTE: Using Curator with the DeepSeek API 
+The DeepSeek API is experiencing intermittent issues and will return empty responses during times of high traffic. We recommend
+calling the DeepSeek API through the `openai` backend, with a high max retries so that we can retry failed requests upon empty
+response and a reasonable max requests and tokens per minute so we don't retry too aggressively and overwhelm the API.
 
+```python
+llm = curator.LLM(
+    model_name="deepseek-reasoner",
+    generation_params={"temp": 0.0},
+    backend_params={
+        "max_requests_per_minute": 100,
+        "max_tokens_per_minute": 10_000_000,
+        "base_url": "https://api.deepseek.com/",
+        "api_key": <YOUR_DEEPSEEK_API_KEY>,
+        "max_retries": 50,
+    },
+    backend="openai",
+)
+```
+
+## 🎉 What's New 
 #### [2025.01.30] Batch Processing Support
 
 - [Batch Mode](https://www.bespokelabs.ai/blog/batch-processing-with-curator): Cut Token Costs in Half: 
@@ -46,8 +65,6 @@ llm = curator.LLM(
     backend_params={"max_retries": 1, "completion_window": "1h"},
 )
 ```
-
-
 
 ## Overview
 
@@ -181,6 +198,10 @@ and other examples in the [examples](examples) directory.
 
 See the [docs](https://docs.bespokelabs.ai/) for more details as well as
 for troubleshooting information.
+
+### Anonymized Telemetry
+
+We collect minimal, anonymized usage telemetry to help prioritize new features and improvements that benefit the Curator community. You can opt out by setting the `TELEMETRY_ENABLED` environment variable to `False`. 
 
 ## Bespoke Curator Viewer
 
